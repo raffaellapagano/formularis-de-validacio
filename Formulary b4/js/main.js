@@ -26,8 +26,6 @@ function registerValidate() {
 		document.getElementById("errorEmail").textContent = "El email no cumple el formato";
 		acumErrores ++;
 	}
-    
-	document.getElementById("confirmEmail").textContent = inputEmail;
 	
     if(inputPassword.value == "") {
 		inputPassword.classList.add("is-invalid");
@@ -102,4 +100,8 @@ function validar_email(email) {
 function validar_password(password){
     var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&+¿_\-\.]{8,}$/;
 	return regex.test(password) ? true : false;
+}
+
+function abrirModal(){
+	document.getElementById("confirmEmail").textContent = "Email: " + inputEmail.value;
 }
