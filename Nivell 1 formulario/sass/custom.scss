@@ -1,0 +1,9 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+$primary: rgb(33, 33, 65);
+$warning: rgb(248, 248, 141);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Add custom code after this
