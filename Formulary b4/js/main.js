@@ -107,7 +107,7 @@ function abrirModal(){
 	document.getElementById("confirmDireccion").textContent = "Direcció: " + inputAddress.value;
 	document.getElementById("confirmCiudad").textContent = "Localidad: " + inputCity.value;
 	document.getElementById("confirmProvincia").textContent = "Provincia: " + inputProvince.value;
-	document.getElementById("confirmCP").textContent = "CP: " + inputProvince.value;
+	document.getElementById("confirmCP").textContent = "CP: " + inputZip.value;
 	}else{
 	document.getElementById("confirmEmail").textContent = "Datos incorrectos!";
 	}
