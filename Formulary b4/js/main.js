@@ -25,7 +25,7 @@ function registerValidate() {
         acumErrores ++;
     }else if(!validar_name(inputName.value)){
 		inputName.classList.add("is-invalid");
-		document.getElementById("errorName").textContent = "El nom no cumple el formato de mes de tres lletres";
+		document.getElementById("errorName").textContent = "El nom no cumple el formato de mes de tres caràcters";
 		acumErrores ++;
 	}
 
@@ -35,7 +35,7 @@ function registerValidate() {
         acumErrores ++;
     }else if(!validar_name(inputSurname.value)){
 		inputSurname.classList.add("is-invalid");
-		document.getElementById("errorSurname").textContent = "El cognom no cumple el formato de mes de tres lletres";
+		document.getElementById("errorSurname").textContent = "El cognom no cumple el formato de mes de tres caràcters";
 		acumErrores ++;
 	}
 
