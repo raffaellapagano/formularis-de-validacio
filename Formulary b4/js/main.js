@@ -1,4 +1,5 @@
 const form = document.getElementById('myFormId');
+var validacion = false;
 
 function registerValidate() {
 	var acumErrores = 0;
@@ -8,14 +9,13 @@ function registerValidate() {
 	//var inputEmail = document.forms["myForm"]["inputEmail"];
 
 	var inputEmail = document.getElementById('inputEmail');
-	
 	var inputPassword = document.forms["myForm"]["inputPassword"];
-	// var inputAddress = document.forms["myForm"]["inputAddress"];
-	// var inputProvince = document.forms["myForm"]["inputProvince"];
-	// var inputCity = document.forms["myForm"]["inputCity"];
-	// var inputZip = document.forms["myForm"]["inputZip"];
-    // var inputZipOk = inputZip.value;
-	// var gridCheck = document.forms["myForm"]["gridCheck"];
+	var inputAddress = document.forms["myForm"]["inputAddress"];
+	var inputProvince = document.forms["myForm"]["inputProvince"];
+	var inputCity = document.forms["myForm"]["inputCity"];
+	var inputZip = document.forms["myForm"]["inputZip"];
+    var inputZipOk = inputZip.value;
+	var gridCheck = document.forms["myForm"]["gridCheck"];
 
 	if(inputEmail.value == "") {
 		inputEmail.classList.add("is-invalid");
@@ -47,44 +47,43 @@ function registerValidate() {
 		acumErrores ++;
 	}
 	
-    // if(inputAddress.value == "") {
-	// 	inputAddress.classList.add("is-invalid");
-	// 	document.getElementById("errorAddress").textContent = "Es campo es obligatorio";
-	// 	acumErrores ++;
-	// }
+    if(inputAddress.value == "") {
+		inputAddress.classList.add("is-invalid");
+		document.getElementById("errorAddress").textContent = "Es campo es obligatorio";
+		acumErrores ++;
+	}
 
-    // if(inputProvince.value == "") {
-	// 	inputProvince.classList.add("is-invalid");
-	// 	document.getElementById("errorProvince").textContent = "La provincia es obligatoria";
-	// 	acumErrores ++;
-	// }
+    if(inputProvince.value == "") {
+		inputProvince.classList.add("is-invalid");
+		document.getElementById("errorProvince").textContent = "La provincia es obligatoria";
+		acumErrores ++;
+	}
 	
-	// if(inputCity.value == "") {
-	// 	inputCity.classList.add("is-invalid");
-	// 	document.getElementById("errorCity").textContent = "Falta la ciutat";
-	// 	acumErrores ++;
-	// }
+	if(inputCity.value == "") {
+		inputCity.classList.add("is-invalid");
+		document.getElementById("errorCity").textContent = "Falta la ciutat";
+		acumErrores ++;
+	}
 	
-	// if(inputZipOk == "" || inputZipOk.length!==5) {
-	// 	inputZip.classList.add("is-invalid");
-	// 	document.getElementById("errorZip").textContent = "El codi postal no compleix els requisitis";
-	// 	acumErrores ++;
-	// }
+	if(inputZipOk == "" || inputZipOk.length!==5) {
+		inputZip.classList.add("is-invalid");
+		document.getElementById("errorZip").textContent = "El codi postal no compleix els requisitis";
+		acumErrores ++;
+	}
 	
-	// if(!gridCheck.checked) {
-	// 	gridCheck.classList.add("is-invalid");
-	// 	document.getElementById("errorCheck").textContent = "Acepta las bases";
-	// 	acumErrores ++;
-	// }
+	if(!gridCheck.checked) {
+		gridCheck.classList.add("is-invalid");
+		document.getElementById("errorCheck").textContent = "Acepta las bases";
+		acumErrores ++;
+	}
 
     if (acumErrores > 0){
         return false;
     }else{
+		validacion = true;
 		return true;
 	}
 }
-
-
 
 form.addEventListener('blur', (event) => {
 	console.log(event);
@@ -103,5 +102,13 @@ function validar_password(password){
 }
 
 function abrirModal(){
+	if (validacion == true){
 	document.getElementById("confirmEmail").textContent = "Email: " + inputEmail.value;
+	document.getElementById("confirmDireccion").textContent = "Direcció: " + inputAddress.value;
+	document.getElementById("confirmCiudad").textContent = "Localidad: " + inputCity.value;
+	document.getElementById("confirmProvincia").textContent = "Provincia: " + inputProvince.value;
+	document.getElementById("confirmCP").textContent = "CP: " + inputProvince.value;
+	}else{
+	document.getElementById("confirmEmail").textContent = "Datos incorrectos!";
+	}
 }

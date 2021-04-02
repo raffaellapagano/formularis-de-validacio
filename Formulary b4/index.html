@@ -31,7 +31,7 @@
     <div class="header">
       <h1>Formulari de validació</h1>
     </div>
-      <form onclick="abrirModal()" method="POST" id="myFormId" onsubmit="return registerValidate()" name="myForm">
+      <form method="POST" id="myFormId" onsubmit="return registerValidate()" name="myForm">
         <div class="form-row mb-3">
           <label for="exampleInputEmail1" class="form-label">Email</label>
           <input type="email" class="form-control" id="inputEmail">
@@ -50,7 +50,7 @@
               <div class="invalid-feedback" id="errorPassword2"></div>
             </div>
           </div>
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="inputAddress">Direcció</label>
             <input type="text" class="form-control" id="inputAddress">
             <div class="invalid-feedback" id="errorAddress"></div>
@@ -77,7 +77,7 @@
               <input type="text" class="form-control" id="inputZip">
               <div class="invalid-feedback" id="errorZip"></div>
             </div>
-          </div> -->
+          </div>
           <div class="form-group">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="gridCheck">
@@ -91,8 +91,10 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
           </div>
-          <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#confirmModal">
-            Regístrate
+          <!-- debería ser type="submit" pero me manda a un error -->
+          <button type="button" class="btn btn-primary" onclick="registerValidate()">Crear</button>
+          <button type="button" class="btn btn-primary m-2" onclick="abrirModal()" data-bs-toggle="modal" data-bs-target="#confirmModal">
+            Confirma
           </button>
       </form>
     </div>
@@ -110,6 +112,10 @@
     </div>
     <div class="modal-body">
       <p id="confirmEmail"></p>
+      <p id="confirmDireccion"></p>
+      <p id="confirmCiudad"></p>
+      <p id="confirmProvincia"></p>
+      <p id="confirmCP"></p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
