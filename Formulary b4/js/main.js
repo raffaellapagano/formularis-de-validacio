@@ -8,6 +8,8 @@ function registerValidate() {
 	
 	//var inputEmail = document.forms["myForm"]["inputEmail"];
 
+	var inputName = document.getElementById('inputName');
+	var inputSurname = document.getElementById('inputSurname');
 	var inputEmail = document.getElementById('inputEmail');
 	var inputPassword = document.forms["myForm"]["inputPassword"];
 	var inputAddress = document.forms["myForm"]["inputAddress"];
@@ -16,6 +18,26 @@ function registerValidate() {
 	var inputZip = document.forms["myForm"]["inputZip"];
     var inputZipOk = inputZip.value;
 	var gridCheck = document.forms["myForm"]["gridCheck"];
+
+	if(inputName.value == "") {
+		inputName.classList.add("is-invalid");
+		document.getElementById("errorName").textContent = "Este campo es obligatorio";
+        acumErrores ++;
+    }else if(!validar_name(inputName.value)){
+		inputName.classList.add("is-invalid");
+		document.getElementById("errorName").textContent = "El nom no cumple el formato de mes de tres lletres";
+		acumErrores ++;
+	}
+
+	if(inputSurname.value == "") {
+		inputSurname.classList.add("is-invalid");
+		document.getElementById("errorSurname").textContent = "Este campo es obligatorio";
+        acumErrores ++;
+    }else if(!validar_name(inputSurname.value)){
+		inputSurname.classList.add("is-invalid");
+		document.getElementById("errorSurname").textContent = "El cognom no cumple el formato de mes de tres lletres";
+		acumErrores ++;
+	}
 
 	if(inputEmail.value == "") {
 		inputEmail.classList.add("is-invalid");
@@ -91,6 +113,11 @@ form.addEventListener('blur', (event) => {
     //registerValidate();
 }, true);
 
+function validar_name(nom) {
+	var regex = /(\w[a-zA-Z]{3})/;
+	return regex.test(nom) ? true : false;
+}
+
 function validar_email(email) {
 	var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	return regex.test(email) ? true : false;
@@ -103,6 +130,8 @@ function validar_password(password){
 
 function abrirModal(){
 	if (validacion == true){
+	document.getElementById("confirmName").textContent = "Nom: " + inputName.value;
+	document.getElementById("confirmSurname").textContent = "Cognom: " + inputSurname.value;
 	document.getElementById("confirmEmail").textContent = "Email: " + inputEmail.value;
 	document.getElementById("confirmDireccion").textContent = "Direcció: " + inputAddress.value;
 	document.getElementById("confirmCiudad").textContent = "Localidad: " + inputCity.value;
