@@ -100,10 +100,10 @@ function registerValidate() {
 	}
 
     if (acumErrores > 0){
+		validacion = false;
         return false;
     }else{
 		validacion = true;
-		alert("Se ha guardat correctament");
 		return true;
 	}
 }
@@ -129,8 +129,14 @@ function validar_password(password){
 	return regex.test(password) ? true : false;
 }
 
+// $("#btnGuardar").click(function(){
+// 	$("#myAlert").alert("close");
+//   });
+
 function abrirModal(){
 	if (validacion == true){
+	document.getElementById("modal-body2").style.display = "none";
+	document.getElementById("modal-body").style.display = "block";
 	document.getElementById("confirmName").textContent = inputName.value;
 	document.getElementById("confirmSurname").textContent =  inputSurname.value;
 	document.getElementById("confirmEmail").textContent =  inputEmail.value;
@@ -139,6 +145,7 @@ function abrirModal(){
 	document.getElementById("confirmProvincia").textContent = inputProvince.value;
 	document.getElementById("confirmCP").textContent = inputZip.value;
 	}else{
-	document.getElementById("confirmEmail").textContent = "Datos incorrectos!";
+		document.getElementById("modal-body").style.display = "none";
+		document.getElementById("modal-body2").style.display = "block";
 	}
 }
