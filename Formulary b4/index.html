@@ -109,9 +109,9 @@
         </div>
         <div class="row d-flex justify-content-end">
           <!-- debería ser type="submit" pero me manda a un error -->
-          <button type="button" class="btn btn-primary btn-lg ml-2" onclick="registerValidate()">Crear</button>
+          <button type="button" class="btn btn-primary btn-lg ml-2" onclick="registerValidate()">Guardar</button>
           <button type="button" class="btn btn-primary ml-2" onclick="abrirModal()" data-bs-toggle="modal" data-bs-target="#confirmModal">
-            Confirma
+            Confirmar
           </button>
         </div>
       </form>
@@ -130,13 +130,13 @@
       </button>
     </div>
     <div class="modal-body">
-      <p id="confirmName"></p>
-      <p id="confirmSurname"></p>
-      <p id="confirmEmail"></p>
-      <p id="confirmDireccion"></p>
-      <p id="confirmCiudad"></p>
-      <p id="confirmProvincia"></p>
-      <p id="confirmCP"></p>
+      <p ><span class="font-weight-bold">Nom: </span><span id="confirmName"></span></p>
+      <p ><span class="font-weight-bold">Cognom: </span><span id="confirmSurname"></span></p>
+      <p ><span class="font-weight-bold">Email: </span><span id="confirmEmail"></span></p>
+      <p ><span class="font-weight-bold">Direcció: </span><span id="confirmDireccion"></span></p>
+      <p ><span class="font-weight-bold">Localidad: </span><span id="confirmCiudad"></span></p>
+      <p ><span class="font-weight-bold">Provincia: </span><span id="confirmProvincia"></span></p>
+      <p ><span class="font-weight-bold">C.P.: </span><span id="confirmCP"></span></p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -130,13 +130,13 @@ function validar_password(password){
 
 function abrirModal(){
 	if (validacion == true){
-	document.getElementById("confirmName").textContent = "Nom: " + inputName.value;
-	document.getElementById("confirmSurname").textContent = "Cognom: " + inputSurname.value;
-	document.getElementById("confirmEmail").textContent = "Email: " + inputEmail.value;
-	document.getElementById("confirmDireccion").textContent = "Direcció: " + inputAddress.value;
-	document.getElementById("confirmCiudad").textContent = "Localidad: " + inputCity.value;
-	document.getElementById("confirmProvincia").textContent = "Provincia: " + inputProvince.value;
-	document.getElementById("confirmCP").textContent = "CP: " + inputZip.value;
+	document.getElementById("confirmName").textContent = inputName.value;
+	document.getElementById("confirmSurname").textContent =  inputSurname.value;
+	document.getElementById("confirmEmail").textContent =  inputEmail.value;
+	document.getElementById("confirmDireccion").textContent =  inputAddress.value;
+	document.getElementById("confirmCiudad").textContent = inputCity.value;
+	document.getElementById("confirmProvincia").textContent = inputProvince.value;
+	document.getElementById("confirmCP").textContent = inputZip.value;
 	}else{
 	document.getElementById("confirmEmail").textContent = "Datos incorrectos!";
 	}
