@@ -8,10 +8,11 @@ function registerValidate() {
 	
 	//var inputEmail = document.forms["myForm"]["inputEmail"];
 
-	var inputName = document.getElementById('inputName');
-	var inputSurname = document.getElementById('inputSurname');
-	var inputEmail = document.getElementById('inputEmail');
+	var inputName = document.forms["myForm"]["inputName"];
+	var inputSurname = document.forms["myForm"]["inputSurname"];
+	var inputEmail = document.forms["myForm"]["inputEmail"];
 	var inputPassword = document.forms["myForm"]["inputPassword"];
+	var inputPassword2 = document.forms["myForm"]["inputPassword2"];
 	var inputAddress = document.forms["myForm"]["inputAddress"];
 	var inputProvince = document.forms["myForm"]["inputProvince"];
 	var inputCity = document.forms["myForm"]["inputCity"];
@@ -19,83 +20,30 @@ function registerValidate() {
     var inputZipOk = inputZip.value;
 	var gridCheck = document.forms["myForm"]["gridCheck"];
 
-	if(inputName.value == "") {
-		inputName.classList.add("is-invalid");
-		document.getElementById("errorName").textContent = "Este campo es obligatorio";
-        acumErrores ++;
-    }else if(!validar_name(inputName.value)){
-		inputName.classList.add("is-invalid");
-		document.getElementById("errorName").textContent = "El nom no cumple el formato de mes de tres caràcters";
-		acumErrores ++;
-	}
+	acumErrores = campoObligatorio(inputName, errorName, acumErrores);
+	acumErrores = campoObligatorio(inputSurname, errorSurname, acumErrores);
+	acumErrores = campoObligatorio(inputEmail, errorEmail, acumErrores);
+	acumErrores = campoObligatorio(inputPassword, errorPassword, acumErrores);
+	acumErrores = campoObligatorio(inputAddress, errorAddress, acumErrores);
+	acumErrores = campoObligatorio(inputProvince, errorProvince, acumErrores);
+	acumErrores = campoObligatorio(inputCity, errorCity, acumErrores);
 
-	if(inputSurname.value == "") {
-		inputSurname.classList.add("is-invalid");
-		document.getElementById("errorSurname").textContent = "Este campo es obligatorio";
-        acumErrores ++;
-    }else if(!validar_name(inputSurname.value)){
-		inputSurname.classList.add("is-invalid");
-		document.getElementById("errorSurname").textContent = "El cognom no cumple el formato de mes de tres caràcters";
-		acumErrores ++;
-	}
-
-	if(inputEmail.value == "") {
-		inputEmail.classList.add("is-invalid");
-		document.getElementById("errorEmail").textContent = "Este campo es obligatorio";
-        acumErrores ++;
-    }else if(!validar_email(inputEmail.value)){
-		inputEmail.classList.add("is-invalid");
-		document.getElementById("errorEmail").textContent = "El email no cumple el formato";
-		acumErrores ++;
-	}
-	
-    if(inputPassword.value == "") {
-		inputPassword.classList.add("is-invalid");
-		document.getElementById("errorPassword").textContent = "Este campo es obligatorio";
-		acumErrores ++;
-	}else if(!validar_password(inputPassword.value)){
-		inputPassword.classList.add("is-invalid");
-		document.getElementById("errorPassword").textContent = "Password mínim 8 caràcters, una majúscula i un número";
-		acumErrores ++;
-	}
-
-	if(inputPassword2.value == "") {
+	if(!validar_password2(inputPassword.value, inputPassword2.value)){
 		inputPassword2.classList.add("is-invalid");
-		document.getElementById("errorPassword2").textContent = "Este campo es obligatorio";
-		acumErrores ++;
-	}else if(inputPassword.value !== inputPassword2.value){
-		inputPassword2.classList.add("is-invalid");
-		document.getElementById("errorPassword2").textContent = "El password no coincide con el anterior";
+		errorPassword2.textContent = "La contrasenya no coincideix amb l'anterior";
 		acumErrores ++;
 	}
 	
-    if(inputAddress.value == "") {
-		inputAddress.classList.add("is-invalid");
-		document.getElementById("errorAddress").textContent = "Es campo es obligatorio";
-		acumErrores ++;
-	}
-
-    if(inputProvince.value == "") {
-		inputProvince.classList.add("is-invalid");
-		document.getElementById("errorProvince").textContent = "La provincia es obligatoria";
-		acumErrores ++;
-	}
-	
-	if(inputCity.value == "") {
-		inputCity.classList.add("is-invalid");
-		document.getElementById("errorCity").textContent = "Falta la ciutat";
-		acumErrores ++;
-	}
-	
-	if(inputZipOk == "" || inputZipOk.length!==5) {
+ 
+	if(inputZipOk.length!==5) {
 		inputZip.classList.add("is-invalid");
-		document.getElementById("errorZip").textContent = "El codi postal no compleix els requisitis";
+		errorZip.textContent = "El codi postal no compleix els requisitis";
 		acumErrores ++;
 	}
 	
 	if(!gridCheck.checked) {
 		gridCheck.classList.add("is-invalid");
-		document.getElementById("errorCheck").textContent = "Acepta las bases";
+		errorCheck.textContent = "Acepta las bases";
 		acumErrores ++;
 	}
 
@@ -106,6 +54,59 @@ function registerValidate() {
 		validacion = true;
 		return true;
 	}
+}
+
+function campoObligatorio(inputName, idError, acumErrores) {
+	let verificador = false;
+	switch (inputName.id) {
+		case "inputName":
+			verificador = validar_name(inputName.value);
+			break;
+		case "inputSurname":
+			verificador = validar_name(inputName.value);
+			break;
+		case "inputEmail":
+			verificador = validar_email(inputEmail.value);
+			break;
+		case "inputPassword":
+			verificador = validar_password(inputPassword.value);
+			break;
+	}
+
+	if(inputName.value == "") {
+		inputName.classList.add("is-invalid");
+		idError.textContent = "Este campo es obligatorio";
+        acumErrores ++;
+    }else if(!verificador){
+		switch (inputName.id) {
+			case "inputName":
+				inputName.classList.add("is-invalid");
+				idError.textContent = "El nom no cumple el formato de mes de tres caràcters";
+				acumErrores ++;
+				break;
+			case "inputSurname":
+				inputName.classList.add("is-invalid");
+				idError.textContent = "El nom no cumple el formato de mes de tres caràcters";
+				acumErrores ++;
+				break;		
+			case "inputEmail":
+				inputEmail.classList.add("is-invalid");
+				idError.textContent = "El email no cumple el formato";
+				acumErrores ++;
+			break;
+			case "inputPassword":
+				inputPassword.classList.add("is-invalid");
+				idError.textContent = "Password mínim 8 caràcters, una majúscula i un número";
+				acumErrores ++;
+				break;
+			case "inputPassword2":
+				inputPassword.classList.add("is-invalid");
+				idError.textContent = "Password mínim 8 caràcters, una majúscula i un número";
+				acumErrores ++;
+				break;
+		}
+	}
+	return acumErrores;
 }
 
 form.addEventListener('blur', (event) => {
@@ -120,7 +121,7 @@ function validar_name(nom) {
 }
 
 function validar_email(email) {
-	var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var regex = /^([a-zA-Z0-9_\.\-\ñ])+\@(([a-zA-Z0-9\-\ñ])+\.)+([a-zA-Z0-9]{2,4})$/;
 	return regex.test(email) ? true : false;
 }
 
@@ -129,23 +130,27 @@ function validar_password(password){
 	return regex.test(password) ? true : false;
 }
 
-// $("#btnGuardar").click(function(){
-// 	$("#myAlert").alert("close");
-//   });
+function validar_password2(password, password2){
+    if(password === password2){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 function abrirModal(){
 	if (validacion == true){
 	document.getElementById("modal-body2").style.display = "none";
-	document.getElementById("modal-body").style.display = "block";
-	document.getElementById("confirmName").textContent = inputName.value;
-	document.getElementById("confirmSurname").textContent =  inputSurname.value;
-	document.getElementById("confirmEmail").textContent =  inputEmail.value;
-	document.getElementById("confirmDireccion").textContent =  inputAddress.value;
-	document.getElementById("confirmCiudad").textContent = inputCity.value;
-	document.getElementById("confirmProvincia").textContent = inputProvince.value;
-	document.getElementById("confirmCP").textContent = inputZip.value;
+	document.getElementById("modal-body").style.display  = "block";
+	confirmName.textContent = inputName.value;
+	confirmSurname.textContent =  inputSurname.value;
+	confirmEmail.textContent =  inputEmail.value;
+	confirmDireccion.textContent =  inputAddress.value;
+	confirmCiudad.textContent = inputCity.value;
+	confirmProvincia.textContent = inputProvince.value;
+	confirmCP.textContent = inputZip.value;
 	}else{
 		document.getElementById("modal-body").style.display = "none";
 		document.getElementById("modal-body2").style.display = "block";
-	}
+	}return
 }
