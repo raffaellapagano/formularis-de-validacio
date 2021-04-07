@@ -1,12 +1,20 @@
 const form = document.getElementById('myFormId');
 var validacion = false;
+let textMsn = {
+	nombre: "El nom no cumple el formato de mes de tres caràcters",
+	cognom: "El cognom no cumple el formato de mes de tres caràcters",
+	email: "El email no cumple el formato",
+	password: "Password mínim 8 caràcters, una majúscula i un número",
+	contrasenya : "La contrasenya no coincideix amb l'anterior",
+	codigoPostal: "El codi postal no compleix els requisitis",
+	obligatorio: "Este campo es obligatorio",
+	check: "Acepta las bases"
+}
 
 function registerValidate() {
 	var acumErrores = 0;
 	
 	form.classList.remove('is-invalid');
-	
-	//var inputEmail = document.forms["myForm"]["inputEmail"];
 
 	var inputName = document.forms["myForm"]["inputName"];
 	var inputSurname = document.forms["myForm"]["inputSurname"];
@@ -20,30 +28,65 @@ function registerValidate() {
     var inputZipOk = inputZip.value;
 	var gridCheck = document.forms["myForm"]["gridCheck"];
 
-	acumErrores = campoObligatorio(inputName, errorName, acumErrores);
-	acumErrores = campoObligatorio(inputSurname, errorSurname, acumErrores);
-	acumErrores = campoObligatorio(inputEmail, errorEmail, acumErrores);
-	acumErrores = campoObligatorio(inputPassword, errorPassword, acumErrores);
-	acumErrores = campoObligatorio(inputAddress, errorAddress, acumErrores);
-	acumErrores = campoObligatorio(inputProvince, errorProvince, acumErrores);
-	acumErrores = campoObligatorio(inputCity, errorCity, acumErrores);
+	if(inputName.value == "") {
+		ShowMsn(inputName, errorName, textMsn.obligatorio);
+		acumErrores ++;
+    }else if(!validar_name(inputName.value)){
+		ShowMsn(inputName, errorName, textMsn.nombre);
+		acumErrores ++;
+	}
+
+	if(inputSurname.value == "") {
+		ShowMsn(inputSurname, errorSurname, textMsn.obligatorio);
+		acumErrores ++;
+    }else if(!validar_name(inputSurname.value)){
+		ShowMsn(inputSurname, errorSurname, textMsn.cognom);
+		acumErrores ++;
+	}
+
+	if(inputEmail.value == "") {
+		ShowMsn(inputEmail, errorEmail, textMsn.obligatorio);
+		acumErrores ++;
+    }else if(!validar_email(inputEmail.value)){
+		ShowMsn(inputEmail, errorEmail, textMsn.email);
+		acumErrores ++;
+	}
+
+	if(inputPassword.value == "") {
+		ShowMsn(inputPassword, errorPassword, textMsn.obligatorio);
+		acumErrores ++;
+	}else if(!validar_password(inputPassword.value)){
+		ShowMsn(inputPassword, errorPassword, textMsn.password);
+		acumErrores ++;
+	}
 
 	if(!validar_password2(inputPassword.value, inputPassword2.value)){
-		inputPassword2.classList.add("is-invalid");
-		errorPassword2.textContent = "La contrasenya no coincideix amb l'anterior";
+		ShowMsn(inputPassword2, errorPassword2, textMsn.contrasenya);
+		acumErrores ++;
+	}
+
+	if(inputAddress.value == "") {
+		ShowMsn(inputAddress, errorAddress, textMsn.obligatorio);
+		acumErrores ++;
+	}
+
+    if(inputProvince.value == "") {
+		ShowMsn(inputProvince, errorProvince, textMsn.obligatorio);
 		acumErrores ++;
 	}
 	
- 
+	if(inputCity.value == "") {
+		ShowMsn(inputCity, inputCity, textMsn.obligatorio);
+		acumErrores ++;
+	}
+
 	if(inputZipOk.length!==5) {
-		inputZip.classList.add("is-invalid");
-		errorZip.textContent = "El codi postal no compleix els requisitis";
+		ShowMsn(inputZip, errorZip, textMsn.codigoPostal);
 		acumErrores ++;
 	}
 	
 	if(!gridCheck.checked) {
-		gridCheck.classList.add("is-invalid");
-		errorCheck.textContent = "Acepta las bases";
+		ShowMsn(gridCheck, errorCheck, textMsn.check);
 		acumErrores ++;
 	}
 
@@ -56,58 +99,11 @@ function registerValidate() {
 	}
 }
 
-function campoObligatorio(inputName, idError, acumErrores) {
-	let verificador = false;
-	switch (inputName.id) {
-		case "inputName":
-			verificador = validar_name(inputName.value);
-			break;
-		case "inputSurname":
-			verificador = validar_name(inputName.value);
-			break;
-		case "inputEmail":
-			verificador = validar_email(inputEmail.value);
-			break;
-		case "inputPassword":
-			verificador = validar_password(inputPassword.value);
-			break;
-	}
-
-	if(inputName.value == "") {
-		inputName.classList.add("is-invalid");
-		idError.textContent = "Este campo es obligatorio";
-        acumErrores ++;
-    }else if(!verificador){
-		switch (inputName.id) {
-			case "inputName":
-				inputName.classList.add("is-invalid");
-				idError.textContent = "El nom no cumple el formato de mes de tres caràcters";
-				acumErrores ++;
-				break;
-			case "inputSurname":
-				inputName.classList.add("is-invalid");
-				idError.textContent = "El nom no cumple el formato de mes de tres caràcters";
-				acumErrores ++;
-				break;		
-			case "inputEmail":
-				inputEmail.classList.add("is-invalid");
-				idError.textContent = "El email no cumple el formato";
-				acumErrores ++;
-			break;
-			case "inputPassword":
-				inputPassword.classList.add("is-invalid");
-				idError.textContent = "Password mínim 8 caràcters, una majúscula i un número";
-				acumErrores ++;
-				break;
-			case "inputPassword2":
-				inputPassword.classList.add("is-invalid");
-				idError.textContent = "Password mínim 8 caràcters, una majúscula i un número";
-				acumErrores ++;
-				break;
-		}
-	}
-	return acumErrores;
+function ShowMsn(clas, msn, text){
+	clas.classList.add("is-invalid");
+	msn.textContent = text;
 }
+
 
 form.addEventListener('blur', (event) => {
 	console.log(event);
